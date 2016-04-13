@@ -17,3 +17,5 @@ The process flow would be as follows:
 7. The above steps constitute the minimum viable product but some, if not all of the following steps will also be completed by release 4. 
         a. The ability to trigger events on the Roomba from the application. This would demonstrate two-way communication between the application and the hardware. This could be done using Near Field Communication, which Android supports natively on more recent versions of the software. 
         b. A map interface to track the Twittering Roombas registered to a user. This will involve the use of the Google Maps API and the Roomba also posting location information to the online database.
+
+Check out the wiki for the timeline and a discussion about the components of this project.
