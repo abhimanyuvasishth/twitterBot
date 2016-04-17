@@ -1,12 +1,10 @@
 package com.example.abhim_000.twitteringroombafollower;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import java.io.IOException;
+import android.util.Log;
 
 public class TweetFeedController {
 
+    public static final String TAG = "twitteringRoombaLog";
     TweetGetter tweetGetter = new TweetGetter();
     String latestTweet;
     ApiCredentials apiCredentials = new ApiCredentials();
@@ -21,11 +19,8 @@ public class TweetFeedController {
 
     public String getTweets(){
         String url = this.apiCredentials.getApiUrl();
-        try {
-            setLatestTweet(this.tweetGetter.readJsonFromUrl(url));
-        } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-        }
+        Log.d(TAG, "going to: " + url);
+        setLatestTweet(this.tweetGetter.readJsonFromUrl(url));
         return getLatestTweet();
     }
 }
