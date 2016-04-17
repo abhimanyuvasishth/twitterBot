@@ -1,14 +1,13 @@
 package com.example.abhim_000.twitteringroombafollower;
 
 import android.os.AsyncTask;
-import android.util.JsonReader;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -36,12 +35,12 @@ public class TweetGetter {
         public static final String TAG = "twitteringRoombaLog";
 
         @Override
-        protected String doInBackground(String... urls) {
+        protected String doInBackground(String[] params) {
             // params comes from the execute() call: params[0] is the url.
             Log.d(TAG, "Connecting");
             HttpURLConnection urlConnection;
             try {
-                urlConnection = (HttpURLConnection) new URL(urls[0]).openConnection();
+                urlConnection = (HttpURLConnection) new URL(params[0]).openConnection();
                 Log.d(TAG, "Connection opened");
                 urlConnection.setRequestMethod("GET");
                 Log.d(TAG, "GET");
@@ -53,10 +52,10 @@ public class TweetGetter {
                     JsonReader reader = new JsonReader(
                             new InputStreamReader(urlConnection.getInputStream()));
                     JsonParser parser = new JsonParser();
-                    JsonElement element = parser.parse(String.valueOf(reader));
+                    JsonElement element = parser.parse(reader);
                     Log.d(TAG, "parsed");
                     Gson gson = new Gson();
-                    Tweet p = gson.fromJson(element, Tweet.class);
+                    Tweet p = gson.fromJson(element.getAsJsonArray().get(0), Tweet.class);
                     Log.d(TAG, element.toString());
                     return p.toString();
                 }
@@ -67,7 +66,6 @@ public class TweetGetter {
             return "ERROR";
         }
 
-        // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
             setTweet(result);

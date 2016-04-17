@@ -17,6 +17,7 @@ public class TweetFeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tweet_feed);
 
         final TextView Enter = (TextView) findViewById(R.id.textView);
+
         Button ClickButton = (Button) findViewById(R.id.radioButton);
         ClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
