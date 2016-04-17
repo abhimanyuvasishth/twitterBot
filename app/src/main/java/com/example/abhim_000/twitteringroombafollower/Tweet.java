@@ -7,6 +7,10 @@ public class Tweet {
     public String email;
     public String body;
     public String toString(){
-        return postId + id + name + email + body;
+        return "postId: " + postId +
+               "id: " + id +
+               "name: " + name +
+               "email: " + email +
+               "body: " + body;
     }
 }

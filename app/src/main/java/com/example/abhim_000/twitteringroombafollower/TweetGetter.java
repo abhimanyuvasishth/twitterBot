@@ -13,17 +13,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class TweetGetter {
-    String tweet;
-
-    public String getTweet() {
-        return tweet;
-    }
-
-    public void setTweet(String tweet) {
-        this.tweet = tweet;
-    }
-
     public static final String TAG = "twitteringRoombaLog";
+
+    String tweet;
+    public String getTweet() {return tweet; }
+    public void setTweet(String tweet) {this.tweet = tweet;}
 
     public String readJsonFromUrl(String url) {
         Log.d(TAG, "Getter called");

@@ -3,16 +3,14 @@ package com.example.abhim_000.twitteringroombafollower;
 import android.util.Log;
 
 public class TweetFeedController {
-
     public static final String TAG = "twitteringRoombaLog";
     TweetGetter tweetGetter = new TweetGetter();
-    String latestTweet;
     ApiCredentials apiCredentials = new ApiCredentials();
 
+    String latestTweet;
     private String getLatestTweet() {
         return latestTweet;
     }
-
     private void setLatestTweet(String latestTweet) {
         this.latestTweet = latestTweet;
     }
