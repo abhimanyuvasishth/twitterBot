@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class TweetFeedActivity extends AppCompatActivity {
+    private TweetFeedController controller = new TweetFeedController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +19,7 @@ public class TweetFeedActivity extends AppCompatActivity {
         ClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TweetGetter tweetGetter = new TweetGetter();
-                Enter.setText(tweetGetter.latestTweet.toString());
+                Enter.setText(controller.getTweets());
             }
         });
     }

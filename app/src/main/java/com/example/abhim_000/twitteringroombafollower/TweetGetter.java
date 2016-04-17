@@ -1,73 +1,32 @@
 package com.example.abhim_000.twitteringroombafollower;
 
-import android.os.AsyncTask;
+import android.util.JsonReader;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import java.io.BufferedReader;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
-class TweetGetter extends AsyncTask<Void, Void, String> {
+public class TweetGetter {
+    public static final String tagZZ = "twitteringRoombaLog";
 
-    private Exception exception;
-
-    JSONObject latestTweet;
-
-    public JSONObject getLatestTweet() {
-        return latestTweet;
-    }
-
-    protected void onPreExecute() {
-    }
-
-    protected String doInBackground(Void... urls) {
-//        String email = emailText.getText().toString();
-        // Do some validation here
-        ApiCredentials apiCredentials = new ApiCredentials();
-        String urlString = apiCredentials.getApiUrl();
-
-        try {
-//            URL url = new URL(API_URL + "email=" + email + "&apiKey=" + API_KEY);
-            URL url = new URL(urlString);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line).append("\n");
-                }
-                bufferedReader.close();
-                return stringBuilder.toString();
-            }
-            finally{
-                urlConnection.disconnect();
-            }
-        }
-        catch(Exception e) {
-            Log.e("ERROR", e.getMessage(), e);
-            return null;
-        }
-    }
-
-    protected void onPostExecute(String response) {
-        if(response == null) {
-            response = "THERE WAS AN ERROR";
-        }
-        Log.i("INFO", response);
-        try {
-            JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
-            this.latestTweet = object;
-//            String requestID = object.getString("requestId");
-//            int likelihood = object.getInt("likelihood");
-//            JSONArray photos = object.getJSONArray("photos");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public String readJsonFromUrl(String url) throws IOException{
+        System.out.println(tagZZ+"Reading JSON from a file");
+        System.out.println(tagZZ+"----------------------------");
+        URLConnection urlConnection =  new URL(url).openConnection();
+        urlConnection.connect();
+        JsonReader reader = new JsonReader(
+        new InputStreamReader(urlConnection.getInputStream()));
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(String.valueOf(reader));
+        Gson gson = new Gson();
+        Tweet p = gson.fromJson(element, Tweet.class);
+        System.out.println(tagZZ+p.toString());
+        return p.toString();
     }
 }
