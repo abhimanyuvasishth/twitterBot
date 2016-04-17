@@ -26,11 +26,8 @@ public class TweetGetter {
     }
 
     private class TweetGetterTask extends AsyncTask<String, Void, String> {
-        public static final String TAG = "twitteringRoombaLog";
-
         @Override
         protected String doInBackground(String[] params) {
-            // params comes from the execute() call: params[0] is the url.
             Log.d(TAG, "Connecting");
             HttpURLConnection urlConnection;
             try {
