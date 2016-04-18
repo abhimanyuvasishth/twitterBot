@@ -25,26 +25,24 @@ public class TweetFeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_feed);
 
-        txtText=(EditText)findViewById(R.id.editText);
-        Button btnSpeak=(Button)findViewById(R.id.button);
+        txtText = (EditText) findViewById(R.id.editText);
+        Button btnSpeak = (Button) findViewById(R.id.button);
 
         final TextView Enter = (TextView) findViewById(R.id.textView);
-        Log.d(TAG,"aa");
         controller.subscribe(Enter);
         Button ClickButton = (Button) findViewById(R.id.radioButton);
         ClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"clicked");
-
+                Log.d(TAG, "clicked");
                 controller.getTweets();
             }
         });
 
-        tts=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                if(status != TextToSpeech.ERROR) {
+                if (status != TextToSpeech.ERROR) {
                     tts.setLanguage(Locale.ITALIAN);
                 }
             }
@@ -55,16 +53,8 @@ public class TweetFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String toSpeak = txtText.getText().toString();
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH,null,null);
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
-    }
-
-    public void onPause(){
-        if(tts !=null){
-            tts.stop();
-            tts.shutdown();
-        }
-        super.onPause();
     }
 }
