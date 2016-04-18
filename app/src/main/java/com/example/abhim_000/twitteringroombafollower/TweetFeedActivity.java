@@ -29,12 +29,15 @@ public class TweetFeedActivity extends AppCompatActivity {
         Button btnSpeak=(Button)findViewById(R.id.button);
 
         final TextView Enter = (TextView) findViewById(R.id.textView);
+        Log.d(TAG,"aa");
+        controller.subscribe(Enter);
         Button ClickButton = (Button) findViewById(R.id.radioButton);
         ClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"clicked");
-                Enter.setText(controller.getTweets());
+
+                controller.getTweets();
             }
         });
 

@@ -11,13 +11,19 @@ import com.google.gson.stream.JsonReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Observable;
 
-public class TweetGetter {
+public class TweetGetter extends Observable {
     public static final String TAG = "twitteringRoombaLog";
 
     String tweet;
     public String getTweet() {return tweet; }
-    public void setTweet(String tweet) {this.tweet = tweet;}
+    public void setTweet(String tweet) {
+        Log.d(TAG, "set tweet!");
+        this.tweet = tweet;
+        setChanged();
+        notifyObservers(this.tweet);
+    }
 
     public String readJsonFromUrl(String url) {
         Log.d(TAG, "Getter called");
@@ -59,6 +65,7 @@ public class TweetGetter {
 
         @Override
         protected void onPostExecute(String result) {
+            Log.d(TAG,"callng set tweet");
             setTweet(result);
         }
     }
