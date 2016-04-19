@@ -65,7 +65,7 @@ public class TweetGetter extends Observable {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d(TAG,"callng set tweet");
+            Log.d(TAG,"calling set tweet");
             setTweet(result);
         }
     }

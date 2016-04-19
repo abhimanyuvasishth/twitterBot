@@ -31,10 +31,9 @@ public class TweetFeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tweet_feed);
 
         txtText = (EditText) findViewById(R.id.editText);
-        Button btnSpeak = (Button) findViewById(R.id.button);
-
         final TextView Enter = (TextView) findViewById(R.id.textView);
         controller.subscribe(Enter);
+
         Button ClickButton = (Button) findViewById(R.id.radioButton);
         ClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +52,7 @@ public class TweetFeedActivity extends AppCompatActivity {
             }
         });
 
+        Button btnSpeak = (Button) findViewById(R.id.button);
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -85,7 +85,7 @@ public class TweetFeedActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                tts.setLanguage(Locale.UK);
+                tts.setLanguage(Locale.ITALIAN);
             }
         });
     }
