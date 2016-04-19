@@ -44,10 +44,18 @@ public class TweetFeedActivity extends AppCompatActivity {
         });
 
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.ERROR) {
                     Toast.makeText(getApplicationContext(),"Text to speech error", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Log.d(TAG, "no error");
+                    tts.setLanguage(Locale.ITALIAN);
+                    tts.setPitch((float) 0.5);
+                    tts.setSpeechRate((float) 2.0);
+                    Log.d(TAG,tts.getVoices().toString());
                 }
             }
         });
@@ -58,6 +66,7 @@ public class TweetFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String toSpeak = txtText.getText().toString();
+                Log.d(TAG,"Clicked button");
                 tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
@@ -73,18 +82,22 @@ public class TweetFeedActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         tts.setLanguage(Locale.ITALIAN);
+                        Log.d(TAG, "0");
                         break;
                     case 1:
                         tts.setLanguage(Locale.FRENCH);
+                        Log.d(TAG, "1");
                         break;
                     case 2:
                         tts.setLanguage(Locale.UK);
+                        Log.d(TAG, "2");
                         break;
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                Log.d(TAG, "nothing");
                 tts.setLanguage(Locale.ITALIAN);
             }
         });
