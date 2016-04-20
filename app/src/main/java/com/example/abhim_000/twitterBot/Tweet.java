@@ -1,4 +1,4 @@
-package com.example.abhim_000.twitteringroombafollower;
+package com.example.abhim_000.twitterBot;
 
 public class Tweet {
     public String postId;

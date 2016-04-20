@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Twittering Roomba Follower</string>
+    <string name="app_name">twitterBot</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_nfclogin">NFCLoginActivity</string>
 

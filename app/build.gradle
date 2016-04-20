@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.example.abhim_000.twitteringroombafollower"
+        applicationId "com.example.abhim_000.twitterBot"
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
