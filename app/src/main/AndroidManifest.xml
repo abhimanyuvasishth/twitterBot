@@ -11,14 +11,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
-            android:name="com.example.abhim_000.twitterBot.TweetFeedActivity"
-            android:label="@string/app_name" >
+            android:name="com.example.abhim_000.twitterBot.TweetFeedActivity">
         </activity>
 
         <activity
-            android:name="com.example.abhim_000.twitterBot.NFCLoginActivity"
-            android:label="@string/app_name" >
+            android:name="com.example.abhim_000.twitterBot.SpeechSettingsActivity">
+        </activity>
+
+        <activity
+            android:name="com.example.abhim_000.twitterBot.NFCLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,5 +36,4 @@
                 android:resource="@xml/nfc_formats" />
         </activity>
     </application>
-
 </manifest>

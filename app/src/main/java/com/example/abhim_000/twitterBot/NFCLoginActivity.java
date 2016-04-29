@@ -7,6 +7,7 @@ import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.nfc.tech.MifareUltralight;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,10 +22,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 public class NFCLoginActivity extends AppCompatActivity {
-
-/*    got help from this tutorial: http://code.tutsplus.com/tutorials/reading-nfc-tags-with-android--mobile-17278
-      also referred to: https://www.youtube.com/watch?v=9HbuHlsoDQc
- */
+    /*
+        got help from this tutorial: http://code.tutsplus.com/tutorials/reading-nfc-tags-with-android--mobile-17278
+        also referred to: https://www.youtube.com/watch?v=9HbuHlsoDQc
+     */
 
     public static final String TAG = "twitteringRoombaLog";
     private EditText txtText;
@@ -66,9 +67,13 @@ public class NFCLoginActivity extends AppCompatActivity {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String[] techList = tag.getTechList();
         String searchedTech = Ndef.class.getName();
+        String searchMifare = MifareUltralight.class.getName();
 
         for (String tech : techList) {
-            if (searchedTech.equals(tech)) {
+            if (searchMifare.equals(tech)){
+                Log.d(TAG,"Mifare");
+            }
+            else if (searchedTech.equals(tech)) {
                 Log.d(TAG, "Executing task");
                 new NdefReaderTask().execute(tag);
                 break;
@@ -156,10 +161,6 @@ public class NFCLoginActivity extends AppCompatActivity {
             // Get the Language Code
             int languageCodeLength = payload[0] & 0063;
 
-            // String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
-            // e.g. "en"
-
-            // Get the Text
             Log.d(TAG, "returning text");
             return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
         }
@@ -172,5 +173,4 @@ public class NFCLoginActivity extends AppCompatActivity {
             }
         }
     }
-
 }

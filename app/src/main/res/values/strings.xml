@@ -4,4 +4,5 @@
     <string name="title_activity_nfclogin">NFCLoginActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_tweet_feed">TweetFeedActivity</string>
 </resources>
