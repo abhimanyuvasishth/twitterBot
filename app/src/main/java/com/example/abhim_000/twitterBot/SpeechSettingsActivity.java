@@ -41,7 +41,6 @@ public class SpeechSettingsActivity extends AppCompatActivity {
                     tts.setLanguage(Locale.ITALIAN);
                     tts.setPitch((float) 0.5);
                     tts.setSpeechRate((float) 2.0);
-                    Log.d(TAG,tts.getVoices().toString());
                 }
             }
         });
