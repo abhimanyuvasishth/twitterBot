@@ -13,7 +13,7 @@ The process flow would be as follows:
 3. The converted text is then posted to either an online database such as IBM's Cloudant or Xively, which provides an API endpoint from which a data stream can be received in JSON format.
 4. The data will also be posted to a twitter account created for this Roomba, where followers can view data streams from the twitterBot.
 5. The data will be pulled from this API endpoint and the user can, after logging into the Android application, view the stream of text that the twitterBot has listened to.
-6. Using a text-speech API, the user can click on a particular element from data stream (a tweet size string) and can listen to it.
+6. Using a text-speech API, the user can click on a particular element from data stream (a tweetString size string) and can listen to it.
 7. The above steps constitute the minimum viable product but some, if not all of the following steps will also be completed by release 4. 
         a. The ability to trigger events on the Roomba from the application. This would demonstrate two-way communication between the application and the hardware. This could be done using Near Field Communication, which Android supports natively on more recent versions of the software. 
         b. A map interface to track the Twittering Roombas registered to a user. This will involve the use of the Google Maps API and the Roomba also posting location information to the online database.

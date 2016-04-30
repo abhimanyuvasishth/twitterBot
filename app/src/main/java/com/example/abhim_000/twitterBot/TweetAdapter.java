@@ -1,6 +1,7 @@
 package com.example.abhim_000.twitterBot;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class TweetAdapter extends ArrayAdapter<Tweet>{
-
+    public static final String TAG = "twitteringRoombaLog";
     public TweetAdapter(Context context, int resource, ArrayList<Tweet> tweets) {
         super(context, resource, tweets);
     }
 
-    // Used to quickly load the next tweet elements onto the list view
+    // Used to quickly load the next tweetString elements onto the list view
     private static class ViewHolder {
         TextView name;
         TextView body;

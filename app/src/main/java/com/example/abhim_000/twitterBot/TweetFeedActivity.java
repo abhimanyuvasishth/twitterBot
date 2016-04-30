@@ -8,21 +8,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
 public class TweetFeedActivity extends AppCompatActivity {
     public static final String TAG = "twitteringRoombaLog";
-    private TweetFeedController controller = new TweetFeedController();
+    private TweetFeedController controller = new TweetFeedController(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_feed);
-
-        final TextView Enter = (TextView) findViewById(R.id.jsonText);
-        controller.subscribe(Enter);
 
         Button SpeechButton = (Button) findViewById(R.id.speechSettingsButton);
         SpeechButton.setOnClickListener(new View.OnClickListener() {
@@ -39,20 +35,14 @@ public class TweetFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "clicked");
-                controller.getTweets();
+                controller.getTweetList();
             }
         });
+    }
 
+    public void updateTextViews(ArrayList<Tweet> tweetList){
         ListView listView = (ListView) findViewById(R.id.tweetList);
-        ArrayList<Tweet> myDataArray = new ArrayList<>();
-        String tweetSample = "Get excited about beating Dortmund all you like." +
-                " The draws I master minded v FC Sion and Bordeaux were much more important." +
-                " #winning";
-        String dateSample =  "19:36, February 10 2016.";
-        for (int i = 0; i < 125; i ++) {
-            myDataArray.add(new Tweet(tweetSample, dateSample));
-        }
-        TweetAdapter myAdapter = new TweetAdapter(this, R.layout.tweet_item_layout, myDataArray);
+        TweetAdapter myAdapter = new TweetAdapter(this, R.layout.tweet_item_layout, tweetList);
         listView.setAdapter(myAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

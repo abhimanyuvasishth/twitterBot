@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
@@ -11,27 +12,28 @@ import com.google.gson.stream.JsonReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class TweetGetter extends Observable {
     public static final String TAG = "twitteringRoombaLog";
 
-    String tweet;
-    public String getTweet() {return tweet; }
-    public void setTweet(String tweet) {
-        Log.d(TAG, "set tweet!");
-        this.tweet = tweet;
+    ArrayList<Tweet> tweetList;
+    public void setTweetList(ArrayList<Tweet> tweetList){
+        Log.d(TAG, "set tweetString!");
+        this.tweetList = tweetList;
         setChanged();
-        notifyObservers(this.tweet);
+        notifyObservers(this.tweetList);
     }
 
-    public String readJsonFromUrl(String url) {
+    public void getTweetArray(String url) {
         Log.d(TAG, "Getter called");
         new TweetGetterTask().execute(url);
-        return getTweet();
     }
 
     private class TweetGetterTask extends AsyncTask<String, Void, String> {
+        private ArrayList<Tweet> asyncTweetList = new ArrayList<>();
+
         @Override
         protected String doInBackground(String[] params) {
             Log.d(TAG, "Connecting");
@@ -49,12 +51,15 @@ public class TweetGetter extends Observable {
                     JsonReader reader = new JsonReader(
                             new InputStreamReader(urlConnection.getInputStream()));
                     JsonParser parser = new JsonParser();
-                    JsonElement element = parser.parse(reader);
+                    JsonArray elementArray = (JsonArray) parser.parse(reader);
                     Log.d(TAG, "parsed");
-                    Gson gson = new Gson();
-                    Tweet p = gson.fromJson(element.getAsJsonArray().get(0), Tweet.class);
-                    Log.d(TAG, element.toString());
-                    return p.toString();
+                    for (JsonElement e: elementArray){
+                        Gson gson = new Gson();
+                        Tweet p = gson.fromJson(e, Tweet.class);
+                        this.asyncTweetList.add(this.asyncTweetList.size(), p);
+                        Log.d(TAG, String.valueOf(asyncTweetList.size()));
+                    }
+                    return "Success";
                 }
             } catch (Exception e) {
                 Log.d(TAG, e.getMessage());
@@ -65,8 +70,10 @@ public class TweetGetter extends Observable {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d(TAG,"calling set tweet");
-            setTweet(result);
+            if (result.equals("Success")){
+                Log.d(TAG, "calling set tweetString");
+                setTweetList(asyncTweetList);
+            }
         }
     }
 }
