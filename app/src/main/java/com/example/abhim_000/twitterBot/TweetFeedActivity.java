@@ -45,7 +45,7 @@ public class TweetFeedActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.tweetList);
         ArrayList<Tweet> myDataArray = new ArrayList<>();
-        for (int i = 0; i < 25; i ++) {
+        for (int i = 0; i < 125; i ++) {
             myDataArray.add(new Tweet("Tweet" + i, "Date" + i));
         }
         TweetAdapter myAdapter = new TweetAdapter(this, R.layout.tweet_item_layout, myDataArray);
