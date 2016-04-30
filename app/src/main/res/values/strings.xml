@@ -2,7 +2,16 @@
     <string name="app_name">twitterBot</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_nfclogin">NFCLoginActivity</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_tweet_feed">TweetFeedActivity</string>
+
+    <string name="sample_tweet">
+        Get excited about beating Dortmund all you like.
+        The draws I masterminded v FC Sion and Bordeaux were much more important.
+        #winning
+    </string>
+    <string name="sample_date">
+        19:36, February 10 2016.
+    </string>
+    <string name="sample_text">Some text</string>
 </resources>

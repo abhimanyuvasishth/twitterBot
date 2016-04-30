@@ -35,6 +35,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/tweetList"
         android:layout_below="@+id/speechSettingsButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp" />
 
 </RelativeLayout>
