@@ -39,6 +39,7 @@ public class NFCLoginActivity extends AppCompatActivity {
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         this.button = (Button) findViewById(R.id.button2);
         this.txtText = (EditText) findViewById(R.id.editText2);
+
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

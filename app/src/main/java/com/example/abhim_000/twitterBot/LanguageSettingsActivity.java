@@ -18,7 +18,7 @@ import java.util.Locale;
 
 // Help for text-speech: http://www.tutorialspoint.com/android/android_text_to_speech.htm
 
-public class SpeechSettingsActivity extends AppCompatActivity {
+public class LanguageSettingsActivity extends AppCompatActivity {
     public static final String TAG = "twitteringRoombaLog";
     private TextToSpeech tts;
     private EditText txtText;

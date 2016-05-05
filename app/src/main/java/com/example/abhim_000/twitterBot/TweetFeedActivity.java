@@ -25,7 +25,7 @@ public class TweetFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "clickedButton");
-                Intent intent = new Intent(getApplicationContext(), SpeechSettingsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LanguageSettingsActivity.class);
                 startActivity(intent);
             }
         });

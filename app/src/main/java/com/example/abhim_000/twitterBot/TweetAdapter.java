@@ -17,8 +17,8 @@ public class TweetAdapter extends ArrayAdapter<Tweet>{
 
     // Used to quickly load the next tweetString elements onto the list view
     private static class ViewHolder {
-        TextView name;
-        TextView body;
+        TextView text;
+        TextView date;
     }
 
     /* Convert view allows you to scroll down a list with a lot of options without pre-loading all the options.
@@ -32,15 +32,15 @@ public class TweetAdapter extends ArrayAdapter<Tweet>{
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.tweet_item_layout, parent, false);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.tweetString);
-            viewHolder.body = (TextView) convertView.findViewById(R.id.dateString);
+            viewHolder.text = (TextView) convertView.findViewById(R.id.tweetString);
+            viewHolder.date = (TextView) convertView.findViewById(R.id.dateString);
             convertView.setTag(viewHolder);
         }
         else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.name.setText(tweet.name);
-        viewHolder.body.setText(tweet.body);
+        viewHolder.text.setText(tweet.tweet);
+        viewHolder.date.setText(tweet.date);
         return convertView;
     }
 }

@@ -11,22 +11,16 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-        <activity
-            android:name="com.example.abhim_000.twitterBot.TweetFeedActivity">
+        <activity android:name=".TweetFeedActivity" >
         </activity>
-
-        <activity
-            android:name="com.example.abhim_000.twitterBot.SpeechSettingsActivity">
+        <activity android:name=".LanguageSettingsActivity" >
         </activity>
-
-        <activity
-            android:name="com.example.abhim_000.twitterBot.NFCLoginActivity">
+        <activity android:name=".NFCLoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
             </intent-filter>
