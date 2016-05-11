@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,15 +18,24 @@ import java.util.Locale;
 public class TweetFeedActivity extends AppCompatActivity {
     public static final String TAG = "twitteringRoombaLog";
     private TextToSpeech tts;
-    private TweetFeedController controller = new TweetFeedController(this);
+    private TweetFeedController controller;
     private String params;
+    private Locale[] languages;
+    private float[] speechRates;
+    private float[] pitches;
+    private int languageIndex = 0;
+    private int speechRateIndex = 0;
+    private int pitchIndex = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_feed);
-        Bundle bundle = getIntent().getExtras();
-        params = bundle.getString("message");
+        languages = new Locale[]{Locale.ITALIAN, Locale.FRENCH, Locale.ENGLISH};
+        speechRates  = new float[]{(float) 2.0, (float) 1.0, (float) 0.5};
+        pitches = new float[]{(float) 2.0, (float) 1.0, (float) 0.5};
+        params = Singleton.getInstance().getString();
+        controller = new TweetFeedController(this);
         Button SpeechButton = (Button) findViewById(R.id.speechSettingsButton);
         SpeechButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,12 +55,11 @@ public class TweetFeedActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d(TAG, "no error");
-                    tts.setLanguage(Locale.ITALIAN);
-                    tts.setSpeechRate((float) 2.0);
-                    tts.setPitch((float) 0.5);
                 }
             }
         });
+        String listUpdates = Singleton.getInstance().getSound();
+        updateSoundSettings(listUpdates);
 
         Button JsonButton = (Button) findViewById(R.id.jsonButton);
         JsonButton.setOnClickListener(new View.OnClickListener() {
@@ -77,5 +84,23 @@ public class TweetFeedActivity extends AppCompatActivity {
                 tts.speak(newText, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
+    }
+
+    private void updateSoundSettings (String value) {
+        // Collect data from the intent and use it
+        Log.d(TAG, "received");
+        Log.d(TAG, value);
+        String string = "hello";
+        int language = Integer.parseInt(value.substring(0,1));
+        Log.d(TAG, "L: " + language);
+        tts.setLanguage(languages[language]);
+
+        int speechRate = Integer.parseInt(value.substring(1,2));
+        Log.d(TAG, "R: " + speechRate);
+        tts.setSpeechRate(speechRates[speechRate]);
+
+        int pitch = Integer.parseInt(value.substring(2,3));
+        Log.d(TAG, "P: " + pitch);
+        tts.setPitch(pitches[pitch]);
     }
 }

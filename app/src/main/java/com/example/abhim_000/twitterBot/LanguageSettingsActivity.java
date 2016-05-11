@@ -1,6 +1,7 @@
 package com.example.abhim_000.twitterBot;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -20,12 +21,14 @@ import java.util.Locale;
 public class LanguageSettingsActivity extends AppCompatActivity {
     public static final String TAG = "twitteringRoombaLog";
     private TextToSpeech tts;
+    int[] listUpdates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speech_settings);
 
+        listUpdates = new int[]{0,0,2};
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -48,7 +51,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String toSpeak = "I am a twitter bot";
-                Log.d(TAG,"Clicked button");
+                Log.d(TAG, "Clicked button");
                 tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
@@ -75,6 +78,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                         Log.d(TAG, "2");
                         break;
                 }
+                updateTweetLanguage(position,0);
             }
 
             @Override
@@ -106,6 +110,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                         Log.d(TAG, "2");
                         break;
                 }
+                updateTweetLanguage(position,1);
             }
 
             @Override
@@ -123,7 +128,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
                         tts.setPitch((float) 2.0);
                         Log.d(TAG, "0");
@@ -137,6 +142,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                         Log.d(TAG, "low");
                         break;
                 }
+                updateTweetLanguage(position, 2);
             }
 
             @Override
@@ -145,5 +151,25 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                 tts.setPitch((float) 0.5);
             }
         });
+
+        Button btnConfirm = (Button) findViewById(R.id.buttonConfirm);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String sendString = "";
+                for (int i : listUpdates) {
+                    sendString += i;
+                }
+                Intent intent = new Intent(getApplicationContext(), TweetFeedActivity.class);
+                Singleton.getInstance().setSound(sendString);
+                Log.d(TAG, sendString);
+                Log.d(TAG, "sent");
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void updateTweetLanguage(int position, int index){
+        listUpdates[index] = position;
     }
 }

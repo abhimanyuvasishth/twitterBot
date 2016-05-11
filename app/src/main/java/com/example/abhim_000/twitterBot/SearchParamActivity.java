@@ -37,6 +37,7 @@ public class SearchParamActivity extends AppCompatActivity {
                     Log.d(TAG, "Clicked hashtag");
                     Intent intent = new Intent(getApplicationContext(), TweetFeedActivity.class);
                     intent.putExtra("message", toSpeak);
+                    Singleton.getInstance().setString(toSpeak);
                     startActivity(intent);
                 }
             }
@@ -55,6 +56,7 @@ public class SearchParamActivity extends AppCompatActivity {
                     Log.d(TAG, "Clicked hashtag");
                     Intent intent = new Intent(getApplicationContext(), TweetFeedActivity.class);
                     intent.putExtra("message", toSpeak);
+                    Singleton.getInstance().setString(toSpeak);
                     startActivity(intent);
                 }
             }
