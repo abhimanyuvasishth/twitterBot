@@ -17,4 +17,5 @@
     <string name="sample_date">
         19:36, February 10 2016.
     </string>
+    <string name="title_activity_search_param">SearchParamActivity</string>
 </resources>

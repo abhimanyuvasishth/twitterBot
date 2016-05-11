@@ -21,7 +21,8 @@ public class TweetFeedController implements Observer {
         this.tweetsArrayList = tweetsArrayList;
     }
 
-    public void getTweetList(){
+    public void getTweetList(String params){
+        this.apiCredentials.setParams(params);
         String url = this.apiCredentials.getApiUrl();
         Log.d(TAG, "going to: " + url);
         this.tweetGetter.getTweetArray(url);

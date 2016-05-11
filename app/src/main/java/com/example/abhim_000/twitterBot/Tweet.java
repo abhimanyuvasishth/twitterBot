@@ -8,6 +8,14 @@ public class Tweet {
                "date: " + date;
     }
 
+    public String getTweetText(){
+        return this.tweet;
+    }
+
+    public String getDateText(){
+        return this.date;
+    }
+
     public Tweet(String tweet, String date){
         this.tweet = tweet;
         this.date = date;

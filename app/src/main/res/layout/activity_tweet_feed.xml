@@ -12,17 +12,17 @@
         android:text="Speech Settings"
         android:id="@+id/speechSettingsButton"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click for JSON"
+        android:text="Load Tweets"
         android:id="@+id/jsonButton"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -31,6 +31,15 @@
         android:layout_below="@+id/speechSettingsButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="30dp" />
+
+    <TextView
+        android:text="Tap on list item to play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.3" />
 
 </RelativeLayout>

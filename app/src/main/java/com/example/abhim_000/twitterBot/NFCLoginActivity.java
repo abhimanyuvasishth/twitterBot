@@ -45,7 +45,7 @@ public class NFCLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     if (checkText(txtText.getText().toString())) {
-                        Intent intent = new Intent(getApplicationContext(), TweetFeedActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), SearchParamActivity.class);
                         startActivity(intent);
                         Log.d(TAG, "correct");
                     } else {
