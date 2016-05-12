@@ -13,62 +13,60 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class TweetFeedActivity extends AppCompatActivity {
     public static final String TAG = "twitteringRoombaLog";
     private TextToSpeech tts;
     private TweetFeedController controller;
     private String params;
-    private Locale[] languages;
-    private float[] speechRates;
-    private float[] pitches;
-    private int languageIndex = 0;
-    private int speechRateIndex = 0;
-    private int pitchIndex = 2;
+    public float[] speechRates = new float[]{(float) 2.0, (float) 1.0, (float) 0.5};
+    public float[] pitches = new float[]{(float) 2.0, (float) 1.0, (float) 0.5};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_feed);
-        languages = new Locale[]{Locale.ITALIAN, Locale.FRENCH, Locale.ENGLISH};
-        speechRates  = new float[]{(float) 2.0, (float) 1.0, (float) 0.5};
-        pitches = new float[]{(float) 2.0, (float) 1.0, (float) 0.5};
-        params = Singleton.getInstance().getString();
-        controller = new TweetFeedController(this);
-        Button SpeechButton = (Button) findViewById(R.id.speechSettingsButton);
-        SpeechButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "clickedButton");
-                Intent intent = new Intent(getApplicationContext(), LanguageSettingsActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.ERROR) {
-                    Toast.makeText(getApplicationContext(),"Text to speech error", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Log.d(TAG, "no error");
-                }
-            }
-        });
-        String listUpdates = Singleton.getInstance().getSound();
-        updateSoundSettings(listUpdates);
+        try {
+            params = Singleton.getInstance().getString();
+            controller = new TweetFeedController(this);
+            controller.getTweetList(params);
+            Button SpeechButton = (Button) findViewById(R.id.speechSettingsButton);
 
-        Button JsonButton = (Button) findViewById(R.id.jsonButton);
-        JsonButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "clicked");
-                controller.getTweetList(params);
-            }
-        });
+            SpeechButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "clickedButton");
+                    Intent intent = new Intent(getApplicationContext(), LanguageSettingsActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public void onInit(int status) {
+                    if (status == TextToSpeech.ERROR) {
+                        Toast.makeText(getApplicationContext(), "Text to speech error", Toast.LENGTH_LONG).show();
+                    } else {
+                        Log.d(TAG, "no error");
+                    }
+                }
+            });
+            String listUpdates = Singleton.getInstance().getSound();
+            updateSoundSettings(listUpdates);
+            Button JsonButton = (Button) findViewById(R.id.jsonButton);
+            JsonButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    controller.getTweetList(params);
+                    Log.d(TAG, "clicked");
+
+                }
+            });
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        }
     }
 
     public void updateTextViews(final ArrayList<Tweet> tweetList){
@@ -86,21 +84,11 @@ public class TweetFeedActivity extends AppCompatActivity {
         });
     }
 
-    private void updateSoundSettings (String value) {
-        // Collect data from the intent and use it
-        Log.d(TAG, "received");
+    private void updateSoundSettings(String value) {
         Log.d(TAG, value);
-        String string = "hello";
-        int language = Integer.parseInt(value.substring(0,1));
-        Log.d(TAG, "L: " + language);
-        tts.setLanguage(languages[language]);
-
-        int speechRate = Integer.parseInt(value.substring(1,2));
-        Log.d(TAG, "R: " + speechRate);
+        int speechRate = Integer.parseInt(value.substring(0,1));
         tts.setSpeechRate(speechRates[speechRate]);
-
-        int pitch = Integer.parseInt(value.substring(2,3));
-        Log.d(TAG, "P: " + pitch);
+        int pitch = Integer.parseInt(value.substring(1,2));
         tts.setPitch(pitches[pitch]);
     }
 }

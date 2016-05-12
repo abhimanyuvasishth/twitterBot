@@ -9,15 +9,14 @@ public class Tweet {
     }
 
     public String getTweetText(){
+        this.tweet = tweet.replaceAll("http?\\S+\\s?", "");
+        if (this.tweet.substring(0,2).equals("RT")){
+            this.tweet = this.tweet.substring(3,this.tweet.length()-1);
+        }
         return this.tweet;
     }
 
-    public String getDateText(){
+    public String getTweetDate() {
         return this.date;
-    }
-
-    public Tweet(String tweet, String date){
-        this.tweet = tweet;
-        this.date = date;
     }
 }

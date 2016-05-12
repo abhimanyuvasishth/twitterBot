@@ -1,13 +1,11 @@
 package com.example.abhim_000.twitterBot;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,43 +20,32 @@ public class SearchParamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_param);
 
         txtText = (EditText) findViewById(R.id.search);
-        Button hashtag = (Button) findViewById(R.id.hashtag);
-        Button at = (Button) findViewById(R.id.at);
-        hashtag.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-                String toSpeak = txtText.getText().toString();
-                if (toSpeak.length() == 0){
-                    Toast.makeText(getApplicationContext(), "Enter a search parameter! " + toSpeak, Toast.LENGTH_LONG).show();
-                }
-                else {
-                    toSpeak = "tag="+toSpeak;
-                    Log.d(TAG, "Clicked hashtag");
+        txtText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        txtText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    String toSpeak = txtText.getText().toString();
+                    if (txtText.getText().toString().substring(0,1).equals("#")){
+                        toSpeak = toSpeak.replace("#","").replace("@","").replace(" ","");
+                        toSpeak = "tag="+toSpeak;
+                    }
+                    else if (txtText.getText().toString().substring(0,1).equals("@")){
+                        toSpeak = toSpeak.replace("#","").replace("@","").replace(" ","");
+                        toSpeak = "user="+toSpeak;
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),"Start with a # or @", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
                     Intent intent = new Intent(getApplicationContext(), TweetFeedActivity.class);
-                    intent.putExtra("message", toSpeak);
+                    if (toSpeak.length() == 0){
+                        toSpeak = "user=12091291029029210921";
+                    }
                     Singleton.getInstance().setString(toSpeak);
                     startActivity(intent);
+                    Log.i(TAG, "Enter pressed");
                 }
-            }
-        });
-
-        at.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-                String toSpeak = txtText.getText().toString();
-                if (toSpeak.length() == 0){
-                    Toast.makeText(getApplicationContext(), "Enter a search parameter!" + toSpeak, Toast.LENGTH_LONG).show();
-                }
-                else {
-                    toSpeak = "user="+toSpeak;
-                    Log.d(TAG, "Clicked hashtag");
-                    Intent intent = new Intent(getApplicationContext(), TweetFeedActivity.class);
-                    intent.putExtra("message", toSpeak);
-                    Singleton.getInstance().setString(toSpeak);
-                    startActivity(intent);
-                }
+                return false;
             }
         });
     }

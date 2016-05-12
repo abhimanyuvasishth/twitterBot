@@ -9,20 +9,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Speech Settings"
         android:id="@+id/speechSettingsButton"
+        android:text="Voice"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Load Tweets"
-        android:id="@+id/jsonButton"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -34,12 +25,21 @@
         android:layout_marginBottom="30dp" />
 
     <TextView
-        android:text="Tap on list item to play"
+        android:text="@string/tapInstruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:alpha="0.3" />
+        android:alpha="0.5" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jsonButton"
+        android:text="Reload"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/textView3"
+        android:layout_toStartOf="@+id/textView3" />
 
 </RelativeLayout>

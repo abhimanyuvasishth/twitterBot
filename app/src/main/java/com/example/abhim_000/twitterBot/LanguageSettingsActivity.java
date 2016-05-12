@@ -28,7 +28,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speech_settings);
 
-        listUpdates = new int[]{0,0,2};
+        listUpdates = new int[]{0,2};
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -38,7 +38,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d(TAG, "no error");
-                    tts.setLanguage(Locale.ITALIAN);
+                    tts.setLanguage(Locale.ENGLISH);
                     tts.setPitch((float) 0.5);
                     tts.setSpeechRate((float) 2.0);
                 }
@@ -53,38 +53,6 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                 String toSpeak = "I am a twitter bot";
                 Log.d(TAG, "Clicked button");
                 tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
-            }
-        });
-
-        Spinner dropdownLanguage = (Spinner) findViewById(R.id.spinnerLanguage);
-        String[] languageItems = new String[]{"Italian", "French", "English"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, languageItems);
-        dropdownLanguage.setAdapter(adapter);
-        dropdownLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                switch (position) {
-                    case 0:
-                        tts.setLanguage(Locale.ITALIAN);
-                        Log.d(TAG, "0");
-                        break;
-                    case 1:
-                        tts.setLanguage(Locale.FRENCH);
-                        Log.d(TAG, "1");
-                        break;
-                    case 2:
-                        tts.setLanguage(Locale.UK);
-                        Log.d(TAG, "2");
-                        break;
-                }
-                updateTweetLanguage(position,0);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Log.d(TAG, "nothing");
-                tts.setLanguage(Locale.ITALIAN);
             }
         });
 
@@ -110,7 +78,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                         Log.d(TAG, "2");
                         break;
                 }
-                updateTweetLanguage(position,1);
+                updateTweetLanguage(position,0);
             }
 
             @Override
@@ -142,7 +110,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                         Log.d(TAG, "low");
                         break;
                 }
-                updateTweetLanguage(position, 2);
+                updateTweetLanguage(position, 1);
             }
 
             @Override

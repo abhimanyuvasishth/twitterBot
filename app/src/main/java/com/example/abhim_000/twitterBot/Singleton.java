@@ -7,8 +7,8 @@ public class Singleton {
     private String sound;
 
     private Singleton(){
-        param = "Hello";
-        sound = "002";
+        param = "user=12091291029029210921";
+        sound = "00";
     }
 
     public static Singleton getInstance(){

@@ -4,18 +4,6 @@
     <string name="title_activity_nfclogin">NFCLoginActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_tweet_feed">TweetFeedActivity</string>
-
-    <string name="speech_prompt">Say something&#8230;</string>
-    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
-    <string name="tap_on_mic">Tap on mic to speak</string>
-
-    <string name="sample_tweet">
-        Get excited about beating Dortmund all you like.
-        The draws I masterminded v FC Sion and Bordeaux were much more important.
-        #winning
-    </string>
-    <string name="sample_date">
-        19:36, February 10 2016.
-    </string>
     <string name="title_activity_search_param">SearchParamActivity</string>
+    <string name="tapInstruction">Tap tweet for sound</string>
 </resources>

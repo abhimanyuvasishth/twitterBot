@@ -39,8 +39,8 @@ public class TweetAdapter extends ArrayAdapter<Tweet>{
         else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.text.setText(tweet.tweet);
-        viewHolder.date.setText(tweet.date);
+        viewHolder.text.setText(tweet.getTweetText());
+        viewHolder.date.setText(tweet.getTweetDate());
         return convertView;
     }
 }

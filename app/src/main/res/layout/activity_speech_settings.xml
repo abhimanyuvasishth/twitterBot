@@ -24,29 +24,21 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinnerLanguage"
-        android:gravity="center"
-        android:layout_above="@+id/spinnerSpeed"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="80dp" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/spinnerSpeed"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/editText"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:spinnerMode="dropdown"
+        android:layout_centerHorizontal="true" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerPitch"
         android:layout_below="@+id/spinnerSpeed"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="80dp" />
+        android:layout_centerHorizontal="true"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="50dp" />
 
     <Button
         android:layout_width="wrap_content"
