@@ -115,7 +115,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                 String sendString = "";
                 for (int i : listUpdates) {sendString += i;}
                 Intent intent = new Intent(getApplicationContext(), TweetFeedActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 Singleton.getInstance().setSound(sendString);
                 startActivity(intent);
             }
