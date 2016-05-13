@@ -1,14 +1,11 @@
 package com.example.abhim_000.twitterBot;
 
 import android.os.AsyncTask;
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -16,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class TweetGetter extends Observable {
-    public static final String TAG = "twitteringRoombaLog";
 
     ArrayList<Tweet> tweetList;
     public void setTweetList(ArrayList<Tweet> tweetList){
@@ -53,10 +49,9 @@ public class TweetGetter extends Observable {
                     return "Success";
                 }
             } catch (Exception e) {
-                Log.d(TAG, e.getMessage());
-                return "Exception";
+                return "Error";
             }
-            return "ERROR";
+            return "Error";
         }
 
         @Override
