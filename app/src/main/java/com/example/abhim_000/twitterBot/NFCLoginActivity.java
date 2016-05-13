@@ -29,7 +29,6 @@ public class NFCLoginActivity extends AppCompatActivity {
 
     public static final String TAG = "twitteringRoombaLog";
     private EditText txtText;
-    private Button button;
     private NfcAdapter nfcAdapter;
 
     @Override
@@ -37,15 +36,16 @@ public class NFCLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfclogin);
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        this.button = (Button) findViewById(R.id.button2);
+        Button button = (Button) findViewById(R.id.button2);
         this.txtText = (EditText) findViewById(R.id.editText2);
 
-        this.button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     if (checkText(txtText.getText().toString())) {
                         Intent intent = new Intent(getApplicationContext(), SearchParamActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         Log.d(TAG, "correct");
                     } else {
@@ -53,7 +53,7 @@ public class NFCLoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
-                    Log.d(TAG, e.getMessage().toString());
+                    Log.d(TAG, e.getMessage());
                 }
             }
         });

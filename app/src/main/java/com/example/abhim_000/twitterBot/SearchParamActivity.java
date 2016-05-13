@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class SearchParamActivity extends AppCompatActivity {
     private EditText txtText;
     public static final String TAG = "twitteringRoombaLog";
@@ -42,6 +44,7 @@ public class SearchParamActivity extends AppCompatActivity {
                         toSpeak = "user=12091291029029210921";
                     }
                     Singleton.getInstance().setString(toSpeak);
+                    Singleton.getInstance().setTweetsArrayList(new ArrayList<Tweet>());
                     startActivity(intent);
                     Log.i(TAG, "Enter pressed");
                 }

@@ -18,7 +18,6 @@ import java.util.Locale;
 // Help for text-speech: http://www.tutorialspoint.com/android/android_text_to_speech.htm
 
 public class LanguageSettingsActivity extends AppCompatActivity {
-    public static final String TAG = "twitteringRoombaLog";
     private TextToSpeech tts;
     int[] listUpdates;
 
@@ -116,6 +115,7 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                 String sendString = "";
                 for (int i : listUpdates) {sendString += i;}
                 Intent intent = new Intent(getApplicationContext(), TweetFeedActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Singleton.getInstance().setSound(sendString);
                 startActivity(intent);
             }
