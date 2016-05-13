@@ -10,6 +10,12 @@ public class Tweet {
                "screen_name" + screen_name;
     }
 
+    public Tweet(String tweet, String date, String screen_name){
+        this.tweet = tweet;
+        this.date = date;
+        this.screen_name = screen_name;
+    }
+
     public String getTweetText(){
         this.tweet = tweet.replaceAll("http?\\S+\\s?", "");
         if (this.tweet.substring(0,2).equals("RT")){

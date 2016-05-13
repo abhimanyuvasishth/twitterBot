@@ -20,14 +20,12 @@ public class TweetGetter extends Observable {
 
     ArrayList<Tweet> tweetList;
     public void setTweetList(ArrayList<Tweet> tweetList){
-        Log.d(TAG, "set tweetString!");
         this.tweetList = tweetList;
         setChanged();
         notifyObservers(this.tweetList);
     }
 
     public void getTweetArray(String url) {
-        Log.d(TAG, "Getter called");
         new TweetGetterTask().execute(url);
     }
 
@@ -36,28 +34,21 @@ public class TweetGetter extends Observable {
 
         @Override
         protected String doInBackground(String[] params) {
-            Log.d(TAG, "Connecting");
             HttpURLConnection urlConnection;
             try {
                 urlConnection = (HttpURLConnection) new URL(params[0]).openConnection();
-                Log.d(TAG, "Connection opened");
                 urlConnection.setRequestMethod("GET");
-                Log.d(TAG, "GET");
                 int statusCode = urlConnection.getResponseCode();
-                Log.d(TAG, "StatusCode: " + statusCode);
                 if (statusCode == 200) {
                     urlConnection.connect();
-                    Log.d(TAG, "Connected");
                     JsonReader reader = new JsonReader(
                             new InputStreamReader(urlConnection.getInputStream()));
                     JsonParser parser = new JsonParser();
                     JsonArray elementArray = (JsonArray) parser.parse(reader);
-                    Log.d(TAG, "parsed");
                     for (JsonElement e: elementArray){
                         Gson gson = new Gson();
                         Tweet p = gson.fromJson(e, Tweet.class);
                         this.asyncTweetList.add(this.asyncTweetList.size(), p);
-                        Log.d(TAG, String.valueOf(asyncTweetList.size()));
                     }
                     return "Success";
                 }
@@ -71,8 +62,13 @@ public class TweetGetter extends Observable {
         @Override
         protected void onPostExecute(String result) {
             if (result.equals("Success")){
-                Log.d(TAG, "calling set tweetString");
                 setTweetList(asyncTweetList);
+            }
+            else {
+                final Tweet err = new Tweet("Couldn't go to URL", "", "");
+                ArrayList<Tweet> errList = new ArrayList<>();
+                errList.add(0,err);
+                setTweetList(errList);
             }
         }
     }

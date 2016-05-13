@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class TweetFeedActivity extends AppCompatActivity {
-    public static final String TAG = "twitteringRoombaLog";
     private TextToSpeech tts;
     private TweetFeedController controller;
     private String params;
@@ -35,7 +33,6 @@ public class TweetFeedActivity extends AppCompatActivity {
         SpeechButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-            Log.d(TAG, "clickedButton");
             Intent intent = new Intent(getApplicationContext(), LanguageSettingsActivity.class);
             startActivity(intent);
             }
@@ -47,8 +44,6 @@ public class TweetFeedActivity extends AppCompatActivity {
                 public void onInit(int status) {
                 if (status == TextToSpeech.ERROR) {
                     Toast.makeText(getApplicationContext(), "Text to speech error", Toast.LENGTH_LONG).show();
-                } else {
-                    Log.d(TAG, "no error");
                 }
             }
             });
@@ -59,7 +54,6 @@ public class TweetFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 controller.getTweetList(params);
-                Log.d(TAG, "clicked");
             }
         });
 
@@ -89,7 +83,6 @@ public class TweetFeedActivity extends AppCompatActivity {
     }
 
     private void updateSoundSettings(String value) {
-        Log.d(TAG, value);
         int speechRate = Integer.parseInt(value.substring(0,1));
         tts.setSpeechRate(speechRates[speechRate]);
         int pitch = Integer.parseInt(value.substring(1,2));
