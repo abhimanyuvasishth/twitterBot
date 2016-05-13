@@ -46,7 +46,6 @@ public class SearchParamActivity extends AppCompatActivity {
                     Singleton.getInstance().setString(toSpeak);
                     Singleton.getInstance().setTweetsArrayList(new ArrayList<Tweet>());
                     startActivity(intent);
-                    Log.i(TAG, "Enter pressed");
                 }
                 return false;
             }

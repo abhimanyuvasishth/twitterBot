@@ -60,7 +60,8 @@ public class TweetGetter extends Observable {
                 setTweetList(asyncTweetList);
             }
             else {
-                final Tweet err = new Tweet("Couldn't access tweets. Check your internet connection.", "", "");
+                final Tweet err = new Tweet("Couldn't access tweets. " +
+                        "Check your internet connection or try another hash tag or screen name.", "", "");
                 ArrayList<Tweet> errList = new ArrayList<>();
                 errList.add(0,err);
                 setTweetList(errList);
