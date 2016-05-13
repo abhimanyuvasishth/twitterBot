@@ -27,46 +27,50 @@ public class TweetFeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_feed);
 
-        try {
-            params = Singleton.getInstance().getString();
-            controller = new TweetFeedController(this);
-            controller.getTweetList(params);
-            Button SpeechButton = (Button) findViewById(R.id.speechSettingsButton);
+        params = Singleton.getInstance().getString();
+        controller = new TweetFeedController(this);
+        controller.getTweetList(params);
+        Button SpeechButton = (Button) findViewById(R.id.speechSettingsButton);
 
-            SpeechButton.setOnClickListener(new View.OnClickListener() {
+        SpeechButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "clickedButton");
-                    Intent intent = new Intent(getApplicationContext(), LanguageSettingsActivity.class);
-                    startActivity(intent);
-                }
+            Log.d(TAG, "clickedButton");
+            Intent intent = new Intent(getApplicationContext(), LanguageSettingsActivity.class);
+            startActivity(intent);
+            }
             });
 
-            tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onInit(int status) {
-                    if (status == TextToSpeech.ERROR) {
-                        Toast.makeText(getApplicationContext(), "Text to speech error", Toast.LENGTH_LONG).show();
-                    } else {
-                        Log.d(TAG, "no error");
-                    }
+                if (status == TextToSpeech.ERROR) {
+                    Toast.makeText(getApplicationContext(), "Text to speech error", Toast.LENGTH_LONG).show();
+                } else {
+                    Log.d(TAG, "no error");
                 }
+            }
             });
-            String listUpdates = Singleton.getInstance().getSound();
-            updateSoundSettings(listUpdates);
-            Button JsonButton = (Button) findViewById(R.id.jsonButton);
-            JsonButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    controller.getTweetList(params);
-                    Log.d(TAG, "clicked");
+        String listUpdates = Singleton.getInstance().getSound();
+        updateSoundSettings(listUpdates);
+        Button JsonButton = (Button) findViewById(R.id.jsonButton);
+        JsonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.getTweetList(params);
+                Log.d(TAG, "clicked");
+            }
+        });
 
-                }
-            });
-        } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
-        }
+        Button SearchButton = (Button) findViewById(R.id.searchbutton);
+        SearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchParamActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void updateTextViews(final ArrayList<Tweet> tweetList){
