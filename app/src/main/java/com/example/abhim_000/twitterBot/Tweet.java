@@ -3,9 +3,11 @@ package com.example.abhim_000.twitterBot;
 public class Tweet {
     public String tweet;
     public String date;
+    public String screen_name;
     public String toString(){
         return "text: " + tweet +
-               "date: " + date;
+               "date: " + date +
+               "screen_name" + screen_name;
     }
 
     public String getTweetText(){
@@ -18,5 +20,9 @@ public class Tweet {
 
     public String getTweetDate() {
         return this.date;
+    }
+
+    public String getTweetScreenName() {
+        return this.screen_name;
     }
 }

@@ -37,7 +37,6 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Text to speech error", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Log.d(TAG, "no error");
                     tts.setLanguage(Locale.ENGLISH);
                     tts.setPitch((float) 0.5);
                     tts.setSpeechRate((float) 2.0);
@@ -51,7 +50,6 @@ public class LanguageSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String toSpeak = "I am a twitter bot";
-                Log.d(TAG, "Clicked button");
                 tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
@@ -67,15 +65,12 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         tts.setSpeechRate((float) 2.0);
-                        Log.d(TAG, "0");
                         break;
                     case 1:
                         tts.setSpeechRate((float) 1.0);
-                        Log.d(TAG, "1");
                         break;
                     case 2:
                         tts.setSpeechRate((float) 0.5);
-                        Log.d(TAG, "2");
                         break;
                 }
                 updateTweetLanguage(position,0);
@@ -83,7 +78,6 @@ public class LanguageSettingsActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d(TAG, "nothing");
                 tts.setPitch((float) 2.0);
             }
         });
@@ -99,15 +93,12 @@ public class LanguageSettingsActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         tts.setPitch((float) 2.0);
-                        Log.d(TAG, "0");
                         break;
                     case 1:
                         tts.setPitch((float) 1.0);
-                        Log.d(TAG, "1");
                         break;
                     case 2:
                         tts.setPitch((float) 0.5);
-                        Log.d(TAG, "low");
                         break;
                 }
                 updateTweetLanguage(position, 1);
@@ -115,7 +106,6 @@ public class LanguageSettingsActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d(TAG, "nothing");
                 tts.setPitch((float) 0.5);
             }
         });
@@ -125,13 +115,9 @@ public class LanguageSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String sendString = "";
-                for (int i : listUpdates) {
-                    sendString += i;
-                }
+                for (int i : listUpdates) {sendString += i;}
                 Intent intent = new Intent(getApplicationContext(), TweetFeedActivity.class);
                 Singleton.getInstance().setSound(sendString);
-                Log.d(TAG, sendString);
-                Log.d(TAG, "sent");
                 startActivity(intent);
             }
         });
