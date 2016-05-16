@@ -3,7 +3,6 @@ package com.example.abhim_000.twitterBot;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 
 public class SearchParamActivity extends AppCompatActivity {
     private EditText txtText;
-    public static final String TAG = "twitteringRoombaLog";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
